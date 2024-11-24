@@ -7,4 +7,75 @@
     android:layout_height="match_parent"
     tools:context=".FlightList">
 
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/custom_button" />
+
+    <TextView
+        android:id="@+id/textAirport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인춘국제공학 도착 항공편"
+        app:layout_constraintTop_toBottomOf="@id/guideline_list_1"
+        app:layout_constraintStart_toStartOf="parent"
+
+         />
+    <TextView
+        android:id="@+id/textDepartureDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11월 28일"
+        app:layout_constraintTop_toBottomOf="@id/textAirport"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+    <TextView
+        android:id="@+id/textResultCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="결과 913개"
+        app:layout_constraintTop_toBottomOf="@id/textDepartureDate"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
+    <ListView
+        android:id="@+id/listViewFlight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_list_3"
+
+         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_list_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_list_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_list_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

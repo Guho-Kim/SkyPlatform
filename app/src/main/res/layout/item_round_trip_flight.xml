@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/airlineName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="대한항공"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline_item_1"
+        android:layout_marginStart="15dp"
+        />
+
+    <ImageView
+        android:id="@+id/airlineLogo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/korean_air_logo"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_item_2"
+        android:layout_marginStart="15dp"
+        />
+    <TextView
+        android:id="@+id/flightDepartureDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오후 7:00 - 오후 3:00"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_1"
+        app:layout_constraintStart_toEndOf="@+id/airlineLogo"
+        app:layout_constraintBottom_toTopOf="@id/guideline_item_2"
+        android:layout_marginStart="15dp"
+        />
+    <TextView
+        android:id="@+id/flightTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="직항 15시간"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_1"
+        app:layout_constraintBottom_toTopOf="@id/guideline_item_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="50dp"
+
+        />
+
+
+    <ImageView
+        android:id="@+id/airlineLogo2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/korean_air_logo"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_item_3"
+        android:layout_marginStart="15dp"
+        />
+    <TextView
+        android:id="@+id/flightDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오후 2:00 - 오후 15:00"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_2"
+        app:layout_constraintStart_toEndOf="@+id/airlineLogo"
+        app:layout_constraintBottom_toTopOf="@id/guideline_item_3"
+        android:layout_marginStart="15dp"
+
+        />
+    <TextView
+        android:id="@+id/flightTime2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="직항 13시간"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_2"
+        app:layout_constraintBottom_toTopOf="@id/guideline_item_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="50dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/ticketPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1,500,000원"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_item_3"
+        android:layout_marginEnd="20dp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_item_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="30dp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_item_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="70dp"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_item_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="110dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
