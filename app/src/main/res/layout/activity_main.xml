@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_header"
         >
     <Button
-        android:id="@+id/btn_round_trip"
+        android:id="@+id/btnRoundTrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,7 +31,7 @@
         />
 
     <Button
-        android:id="@+id/btn_one_way"
+        android:id="@+id/btnOneWay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -167,7 +167,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btn_search"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

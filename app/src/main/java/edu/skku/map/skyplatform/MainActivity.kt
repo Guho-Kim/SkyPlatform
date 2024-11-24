@@ -2,7 +2,6 @@ package edu.skku.map.skyplatform
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,7 +11,6 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 
@@ -34,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         val db = dbHelper.readableDatabase
         db.close()
 
-        val btn_round_trip = findViewById<Button>(R.id.btn_round_trip)
-        val btn_one_way = findViewById<Button>(R.id.btn_one_way)
-        val btn_search = findViewById<Button>(R.id.btn_search)
+        val btnRoundTrip = findViewById<Button>(R.id.btnRoundTrip)
+        val btnOneWay = findViewById<Button>(R.id.btnOneWay)
+        val btnSearch = findViewById<Button>(R.id.btnSearch)
         val editTextDepartureLocation = findViewById<AutoCompleteTextView>(R.id.editTextDepartureLocation)
         val editTextArrivalLocation = findViewById<AutoCompleteTextView>(R.id.editTextArrivalLocation)
         val editTextDepartureDate  = findViewById<EditText>(R.id.editTextDepartureDate)
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         setupAutoCompleteTextView(editTextArrivalLocation, airports)
 
 
-        btn_round_trip.setOnClickListener {
+        btnRoundTrip.setOnClickListener {
             roundTripOption = true
 
             // 출발일과 도착일 그룹 보이기
@@ -61,14 +59,14 @@ class MainActivity : AppCompatActivity() {
             arrivalGroup.visibility = View.VISIBLE
         }
 
-        btn_one_way.setOnClickListener {
+        btnOneWay.setOnClickListener {
             roundTripOption = false
 
             // 출발일은 보이고 도착일은 숨기기
             departureGroup.visibility = View.VISIBLE
             arrivalGroup.visibility = View.GONE
         }
-        btn_search.setOnClickListener{
+        btnSearch.setOnClickListener{
             val intent = Intent(this, FlightList::class.java).apply{
                 putExtra(EXT_DEPARTURE_LOCATION, editTextDepartureLocation.text.toString().trim())
                 putExtra(EXT_ARRIVAL_LOCATION, editTextArrivalLocation.text.toString().trim())

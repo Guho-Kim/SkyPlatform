@@ -1,11 +1,16 @@
-package edu.skku.map.skyplatform
+package edu.skku.map.skyplatform.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import edu.skku.map.skyplatform.Flight
+import edu.skku.map.skyplatform.R
+import edu.skku.map.skyplatform.utils.AirlineUtils
+import edu.skku.map.skyplatform.utils.DateUtils
 
 class RoundTripFlightAdapter(val data:ArrayList<Flight>, val context: Context):BaseAdapter() {
     override fun getCount(): Int {
@@ -25,26 +30,27 @@ class RoundTripFlightAdapter(val data:ArrayList<Flight>, val context: Context):B
         val generatedView = inflater.inflate(R.layout.item_round_trip_flight, null)
 
         val airlineName = generatedView.findViewById<TextView>(R.id.airlineName)
-        val flightDate = generatedView.findViewById<TextView>(R.id.flightDepartureDate)
-//        val textViewGroupNumber = generatedView.findViewById<TextView>(R.id.textViewGroupSize)
-//        val textViewTime = generatedView.findViewById<TextView>(R.id.textViewLastTime)
-//        val imageViewThumbnail = generatedView.findViewById<ImageView>(R.id.imageViewProfile)
-//        val unReadCount = generatedView.findViewById<TextView>(R.id.unreadNumber)
+        val airlineLogo = generatedView.findViewById<ImageView>(R.id.airlineLogo)
+        val flightDepartureDate = generatedView.findViewById<TextView>(R.id.flightDepartureDate)
+        val flightArrivalDate = generatedView.findViewById<TextView>(R.id.flightArrivalDate)
+        val flightTime = generatedView.findViewById<TextView>(R.id.flightTime)
+        val ticketPrice = generatedView.findViewById<TextView>(R.id.ticketPrice)
+        val flightDiffDate = generatedView.findViewById<TextView>(R.id.flightDiffDate)
 
-        airlineName.text = data[p0].departureLocation
-        flightDate.text = data[p0].departureDate
-//        + " - " + data[p0].arrival_date
 
-//        textViewTime.text = data[p0].lastTime
-//        unReadCount.text = data[p0].unreadCount.toString()
-
-//        if(data[p0].groupNumber>1){
-//            textViewGroupNumber.text = "" + data[p0].groupNumber
-//        }
-//        else{
-//            textViewGroupNumber.text = ""
-//        }
-//        imageViewThumbnail.setImageResource(data[p0].thumbnail)
+        val departureDate = data[p0].departureDate
+        val arrivalDate = data[p0].arrivalDate
+        val diffDate = DateUtils.calculateDayDifference(departureDate, arrivalDate)
+        airlineName.text = data[p0].airlineName
+        flightDepartureDate.text = DateUtils.formatTimeTo12Hour(departureDate)
+        flightArrivalDate.text = DateUtils.formatTimeTo12Hour(arrivalDate)
+        ticketPrice.text = DateUtils.formatCurrency(data[p0].ticketPrice)
+        flightTime.text = DateUtils.calculateFlightTime(departureDate, arrivalDate)
+        if(diffDate>0){
+            flightDiffDate.text = "+" + diffDate.toString()
+        }
+        val logoResource = AirlineUtils.getAirlineLogoResource(data[p0].airlineName)
+        airlineLogo.setImageResource(logoResource)
 
         return generatedView
     }
