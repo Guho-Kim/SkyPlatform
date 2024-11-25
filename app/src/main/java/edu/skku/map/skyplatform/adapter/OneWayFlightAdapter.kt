@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import edu.skku.map.skyplatform.Flight
+import edu.skku.map.skyplatform.OneWayFlight
 import edu.skku.map.skyplatform.R
 import edu.skku.map.skyplatform.utils.AirlineUtils
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 import edu.skku.map.skyplatform.utils.DateUtils
-class OneWayFlightAdapter(val data:ArrayList<Flight>, val context: Context):BaseAdapter() {
+class OneWayFlightAdapter(val data:ArrayList<OneWayFlight>, val context: Context):BaseAdapter() {
     override fun getCount(): Int {
         return data.size
     }
@@ -48,10 +44,9 @@ class OneWayFlightAdapter(val data:ArrayList<Flight>, val context: Context):Base
         flightDepartureDate.text = DateUtils.formatTimeTo12Hour(departureDate)
         flightArrivalDate.text = DateUtils.formatTimeTo12Hour(arrivalDate)
         ticketPrice.text = DateUtils.formatCurrency(data[p0].ticketPrice)
-        flightTime.text = DateUtils.calculateFlightTime(departureDate, arrivalDate)
-        if(diffDate>0){
-            flightDiffDate.text = "+" + diffDate.toString()
-        }
+        flightTime.text = DateUtils.parseFlightTime(data[p0].flightTime)
+        flightDiffDate.text = if (diffDate > 0) "+$diffDate" else ""
+
         val logoResource = AirlineUtils.getAirlineLogoResource(data[p0].airlineName)
         airlineLogo.setImageResource(logoResource)
 

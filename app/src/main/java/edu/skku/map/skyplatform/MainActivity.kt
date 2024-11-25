@@ -21,15 +21,38 @@ class MainActivity : AppCompatActivity() {
         const val EXT_DEPARTURE_DATE = "extra_key_departure_date"
         const val EXT_ARRIVAL_DATE = "extra_key_arrival_date"
         const val EXT_ROUND_TRIP_OPTION = "extra_key_round_trip_option"
+        const val EXT_FLIGHT_DETAIL = "extra_key_flight_detail"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val airportNames = mapOf(
+            "ICN" to "인천국제공항",
+            "SYD" to "시드니공항",
+            "JFK" to "뉴욕존에프케네디공항"
+        )
 
-        // 최초 1회 db 생성
         val dbHelper = DatabaseHelper(this)
         val db = dbHelper.readableDatabase
+
+        val departureCursor = db.rawQuery("SELECT DISTINCT departure_location FROM Flight ORDER BY departure_location", null)
+        val departureAirports = mutableListOf<String>()
+        while (departureCursor.moveToNext()) {
+            val location = departureCursor.getString(departureCursor.getColumnIndexOrThrow("departure_location"))
+            val airportName = airportNames[location] ?: "Unknown Airport"
+            departureAirports.add("$location, $airportName")
+        }
+        val arrivalCursor = db.rawQuery("SELECT DISTINCT arrival_location FROM Flight ORDER BY arrival_location", null)
+        val arrivalAirports = mutableListOf<String>()
+        while (arrivalCursor.moveToNext()) {
+            val location = arrivalCursor.getString(arrivalCursor.getColumnIndexOrThrow("arrival_location"))
+            val airportName = airportNames[location] ?: "Unknown Airport"
+            arrivalAirports.add("$location, $airportName")
+        }
+
+        departureCursor.close()
+        arrivalCursor.close()
         db.close()
 
         val btnRoundTrip = findViewById<Button>(R.id.btnRoundTrip)
@@ -46,9 +69,8 @@ class MainActivity : AppCompatActivity() {
         var roundTripOption = true
 
 
-        val airports = listOf("인천", "뉴욕")
-        setupAutoCompleteTextView(editTextDepartureLocation, airports)
-        setupAutoCompleteTextView(editTextArrivalLocation, airports)
+        setupAutoCompleteTextView(editTextDepartureLocation, departureAirports)
+        setupAutoCompleteTextView(editTextArrivalLocation, arrivalAirports)
 
 
         btnRoundTrip.setOnClickListener {
@@ -67,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             arrivalGroup.visibility = View.GONE
         }
         btnSearch.setOnClickListener{
-            val intent = Intent(this, FlightList::class.java).apply{
+            val intent = Intent(this, FlightActivity::class.java).apply{
                 putExtra(EXT_DEPARTURE_LOCATION, editTextDepartureLocation.text.toString().trim())
                 putExtra(EXT_ARRIVAL_LOCATION, editTextArrivalLocation.text.toString().trim())
                 putExtra(EXT_DEPARTURE_DATE, editTextDepartureDate.text.toString())
@@ -132,8 +154,10 @@ class MainActivity : AppCompatActivity() {
         })
 
         // 아이템 선택 이벤트
-        autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
-            val selectedItem = items[position]
-        }
+//        autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+//            if (position in items.indices) {
+//                val selectedItem = items[position]
+//            }
+//        }
     }
 }

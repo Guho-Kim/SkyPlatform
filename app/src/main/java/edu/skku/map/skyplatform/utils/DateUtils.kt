@@ -8,14 +8,17 @@ import java.util.concurrent.TimeUnit
 object DateUtils {
 
     // 비행 시간 계산
-    fun calculateFlightTime(departure: String, arrival: String): String {
+    fun calculateFlightTime(departure: String, arrival: String): Long {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREA)
 
+        val departureDate = dateFormat.parse(departure)
+        val arrivalDate = dateFormat.parse(arrival)
+        val durationMillis = arrivalDate.time - departureDate.time
+        return durationMillis
+    }
+    // 비행 시간 계산
+    fun parseFlightTime(durationMillis: Long): String {
         return try {
-            val departureDate = dateFormat.parse(departure)
-            val arrivalDate = dateFormat.parse(arrival)
-            val durationMillis = arrivalDate.time - departureDate.time
-
             val hours = TimeUnit.MILLISECONDS.toHours(durationMillis)
             val minutes = TimeUnit.MILLISECONDS.toMinutes(durationMillis) % 60
 
